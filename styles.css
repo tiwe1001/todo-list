@@ -1,0 +1,162 @@
+html, body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: block;
+    justify-content: center;
+    align-items: center;
+}
+
+#app {
+    text-align: center;
+    background-color: #fff;
+    border-radius: 0px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+}
+
+header, footer {
+    align-items: center;
+    background-color: #333;
+    color: white;
+    padding: 1em 0;
+    margin: 0 -2em 1em;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+footer {
+    margin: 1em -2em 0;
+    border-radius: 0 0 8px 8px;
+}
+
+.logo {
+    max-width: 100%;
+    height: 50px;
+    cursor: pointer;
+}
+
+main {
+    padding: 2em 0;
+}
+
+h1 {
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #fff;
+    margin: 0.5em 0;
+    padding: 1em;
+    border: 1px solid #ddd;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: pre-wrap;
+    word-break: break-word;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+li span {
+    flex: 1;
+}
+
+.addNewTask {
+    margin-top: 0px;
+    width: 250px;
+    height: 30px;
+    border-radius: 10px;
+}
+
+button {
+    background-color: #ff6347;
+    color: white;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    border-radius: 15px;
+    margin-top: 5px;
+    margin-right: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background-color: #ff4500;
+}
+
+.btnAdd {
+    margin-top: 0px;
+    margin-bottom: 30px;
+    width: 100px;
+    height: 30px;
+    border-radius: 15px;
+    margin-left: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+.fas.fa-trash-can {
+    color: darkgray;
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+
+.fas{
+    color: darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    margin-left: 10px;
+    position: right;
+}
+
+.fas.fa-check:hover {
+    color: rgb(0, 212, 0);
+}
+
+.fas.fa-pen {
+    color: darkgray;
+    cursor: pointer;
+    margin-right: 10px;
+    position: right;
+}
+
+.fas:hover {
+    color: #ff4500;
+}
+
+.fas.fa-star:hover {
+    color: orange;
+}
+
+.fas.fa-star.favorited {
+    color: orange;
+}
+
+.completed {
+    text-decoration: line-through; 
+}
+
+.sortByContainer {
+    position: relative;
+}
+
+.edit-icons {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.editTextField {
+    display: inline-block;
+    margin-left: 70px;
+}
