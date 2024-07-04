@@ -18,7 +18,7 @@ app.component('todo-list', {
     },
     methods: {
         reloadPage() {
-            location.reload();
+            window.location.reload();
         },
         addTodo() {
             if (this.newTodo.trim() !== '') {
@@ -40,14 +40,27 @@ app.component('todo-list', {
                 this.todos.splice(index, 1);
                 this.saveTodos();
             }
+                const audio = document.getElementById('taskTrashSound');
+                audio.play();
+
         },
         toggleCompleted(todo) {
             todo.completed = !todo.completed;
             this.saveTodos();
+
+            if (todo.completed) {
+                const audio = document.getElementById('taskCompletedSound');
+                audio.play();
+            }
         },
         toggleFavorite(todo) {
             todo.favorite = !todo.favorite;
             this.saveTodos();
+
+            if (todo.favorite) {
+                const audio = document.getElementById('taskFavoriteSound');
+                audio.play();
+            }
         },
         editTodo(todo) {
             todo.editing = true;
@@ -115,46 +128,48 @@ app.component('todo-list', {
         }
     },
     template: `
-        <div>
-            <input class="addNewTask" v-model="newTodo" @keyup.enter="addTodo" placeholder="Neue Aufgabe hinzufügen">
-            <button class="btnAdd" @click="addTodo">Hinzufügen</button>
-            <hr>
-            <div class="sortByContainer">
-                <i class="fas fa-filter" @click="toggleFilterVisibility" title="Filter anzeigen"></i>
-                <div v-if="showFilters">
-                    <button @click="showAll">Alle anzeigen</button>
-                    <button @click="showCompleted">Nur Erledigte anzeigen</button>
-                    <button @click="showUncompleted">Nur Nicht-Erledigte anzeigen</button>
-                </div>
+    <div v-cloak>
+        <input class="addNewTask" v-model="newTodo" @keyup.enter="addTodo" placeholder="Neue Aufgabe hinzufügen">
+        <button class="btnAdd" @click="addTodo">Hinzufügen</button>
+        <hr>
+        <div class="sortByContainer">
+            <i class="fas fa-filter" @click="toggleFilterVisibility" title="Filter anzeigen"></i>
+            <div v-if="showFilters">
+                <button @click="showAll">Alle anzeigen</button>
+                <button @click="showCompleted">Nur Erledigte anzeigen</button>
+                <button @click="showUncompleted">Nur Nicht-Erledigte anzeigen</button>
             </div>
-            <h2>{{ tasksTitle }}</h2>
-            <ul> 
-            <li v-for="(todo, index) in filteredTodos" :key="todo.id">
-                <span :class="{ 'completed': todo.completed }">{{ todo.text }}</span>
-                <div>
+        </div>
+        <div class="tasksTitle" ><h2>{{ tasksTitle }}</h2></div>
+        <ul>
+            <li v-for="(todo, index) in filteredTodos" :key="todo.id" class="todo-item">
+                <div class="todo-content">
+                    <span :class="{ 'completed': todo.completed }">{{ todo.text }}</span>
+                    <div v-if="todo.editing" class="edit-mode">
+                        <input type="text" class="editTextField" v-model="editedTodoText">
+                        <div class="edit-icons">
+                            <i class="fas fa-check" @click="saveEdit(todo)" :title="'Speichern'"></i>
+                            <i class="fas fa-times" @click="cancelEdit(todo)" :title="'Abbrechen'"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="todo-icons">
                     <i v-if="!todo.completed" class="fas fa-check"
-                        @click="toggleCompleted(todo)"
-                        :title="'Erledigt'"></i>
-                    <i v-else class="fas fa-xmark"
-                        @click="toggleCompleted(todo)"
-                        :title="'Nicht erledigt'"></i>
+                       @click="toggleCompleted(todo)"
+                       :title="'Erledigt'"></i>
+                    <i v-else class="fas fa-times"
+                       @click="toggleCompleted(todo)"
+                       :title="'Nicht erledigt'"></i>
                     <i class="fas fa-star"
-                        @click="toggleFavorite(todo)"
-                        :class="{ 'favorited': todo.favorite }"
-                        :title="getFavoriteTooltip(todo)"></i>
+                       @click="toggleFavorite(todo)"
+                       :class="{ 'favorited': todo.favorite }"
+                       :title="getFavoriteTooltip(todo)"></i>
                     <i class="fas fa-pen" @click="editTodo(todo)" title="Bearbeiten"></i>
                     <i class="fas fa-trash-can" @click="removeTodo(todo)" title="Löschen"></i>
                 </div>
-                <div v-if="todo.editing">
-                    <input type="text" class="editTextField" v-model="editedTodoText">
-                    <div class="edit-icons">
-                        <i class="fas fa-check" @click="saveEdit(todo)" :title="'Speichern'"></i>
-                        <i class="fas fa-times" @click="cancelEdit(todo)" :title="'Abbrechen'"></i>
-                    </div>
-                </div>
-                </li>
-            </ul>
-        </div>
+            </li>
+        </ul>
+    </div>
     `
 });
 

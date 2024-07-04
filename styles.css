@@ -16,10 +16,10 @@ html, body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     margin-top: 0px;
     margin-bottom: 0px;
-
+    flex: 1;
 }
 
-header, footer {
+header {
     align-items: center;
     background-color: #333;
     color: white;
@@ -28,9 +28,16 @@ header, footer {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
+
 footer {
-    margin: 1em -2em 0;
-    border-radius: 0 0 8px 8px;
+    bottom: 0;
+    left: 0;
+        align-items: center;
+        background-color: #333;
+        color: white;
+        padding: 1em 0;
+        margin: 0 -2em 1em;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
 }
 
 .logo {
@@ -45,6 +52,11 @@ main {
 
 h1 {
     margin: 0;
+}
+
+.tasksTitle {
+    text-align: left;
+    margin-left: 20px;
 }
 
 ul {
@@ -72,11 +84,19 @@ li span {
     flex: 1;
 }
 
+
 .addNewTask {
     margin-top: 0px;
     width: 250px;
     height: 30px;
-    border-radius: 10px;
+    border-radius: 0px;
+    border: none;
+    border-bottom: 1px solid lightgray;
+    outline: none;
+}
+
+.addNewTask:focus {
+    border-bottom-color: #333;
 }
 
 button {
@@ -133,6 +153,8 @@ button:hover {
 
 .fas:hover {
     color: #ff4500;
+    transform: scale(1.2);
+    transition: transform 0.3s ease; 
 }
 
 .fas.fa-star:hover {
@@ -143,8 +165,14 @@ button:hover {
     color: orange;
 }
 
+.fas.fa-trash-can:hover {
+    transform: rotate(30deg);
+    transition: transform 0.3s ease;
+}
+
 .completed {
-    text-decoration: line-through; 
+    text-decoration: line-through;
+    text-decoration-color: red;
 }
 
 .sortByContainer {
@@ -159,4 +187,8 @@ button:hover {
 .editTextField {
     display: inline-block;
     margin-left: 70px;
+}
+
+#audioPlayer {
+    display: none;
 }
